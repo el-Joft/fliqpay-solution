@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "noUnusedLocals": true,
+    "inlineSourceMap": true,
+    "downlevelIteration": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+  },
+  "typeRoots": ["src/@types", "node_modules/@types"],
+  "include": ["src/**/*", "src/interfaces"],
+  "exclude": ["node_modules", "./lib", "./src/test", "**/*.spec.ts"]
+}
