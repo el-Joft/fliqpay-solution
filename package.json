@@ -1,11 +1,19 @@
 {
   "name": "fliqpay-solution",
   "version": "1.0.0",
-  "description": "Fliqpay solution",
+  "description": "Fliqpay Assessment solution",
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test jest --no-cache --detectOpenHandles --runInBand --forceExit --verbose",
-    "start:dev": "cross-env NODE_ENV=development ts-node-dev --files --debug --clear ./src/index.ts"
+    "start:dev": "cross-env NODE_ENV=development ts-node-dev --files --debug --clear ./src/index.ts",
+    "clean": "rm -rf dist && mkdir dist",
+    "start": "node ./dist/index.js",
+    "prestart:prod": "npm run build",
+    "start:prod": "cross-env NODE_ENV=staging node ./dist/src/index.js",
+    "build": "npm run clean && tsc",
+    "test:cov": "cross-env NODE_ENV=test PORT=5050 jest --no-cache --detectOpenHandles --runInBand --forceExit --coverage --timeout=1500000",
+    "ts-watch": "npm run clean && tsc -w",
+    "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +34,7 @@
     "mongodb": "^3.6.7",
     "mongoose": "^5.12.10",
     "morgan": "^1.10.0",
+    "ts-node": "^9.1.1",
     "ts-node-dev": "^1.1.6"
   },
   "devDependencies": {

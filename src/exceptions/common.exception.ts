@@ -1,4 +1,4 @@
-import HttpException from "./HttpException";
+import HttpException from "./httpException";
 
 class commonException extends HttpException {
   constructor(message: string, status: number) {
