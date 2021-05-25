@@ -9,7 +9,7 @@ const { validationMiddleware } = AppValidationMiddleware;
 const { registration, login } = AuthenticationController;
 
 authenticationRouter.post(
-  "/register",
+  "/signup",
   validationMiddleware(CreateUserDto),
   registration
 );

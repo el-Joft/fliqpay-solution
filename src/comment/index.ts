@@ -10,12 +10,12 @@ const commentRouter: Router = Router();
 const { validationMiddleware, checkParamsId } = AppValidationMiddleware;
 
 const { createComment } = CommentController;
-const { checkAuthToken } = checkAuthentication;
+const { authMiddleware } = checkAuthentication;
 
 // Create
 commentRouter.post(
   "/user/support/:id/comment",
-  checkAuthToken,
+  authMiddleware,
   checkParamsId,
   validationMiddleware(CreateCommentDto),
   createComment

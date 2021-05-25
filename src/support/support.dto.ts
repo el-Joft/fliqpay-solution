@@ -1,14 +1,16 @@
-import { IsString, IsOptional } from "class-validator";
+import { IsString, IsOptional, IsNotEmpty } from "class-validator";
 
 export class CreateSupportDto {
-  @IsString({
+  @IsNotEmpty({
     message: "This Field is Required"
   })
+  @IsString()
   public title: string;
 
-  @IsString({
+  @IsNotEmpty({
     message: "This Field is Required"
   })
+  @IsString()
   public description: string;
 }
 

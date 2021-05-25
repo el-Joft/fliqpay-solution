@@ -3,7 +3,6 @@ import {
   TokenData,
   DataToStoredInToken
 } from "../interfaces/tokenData.interface";
-import { IUser } from "../user/user.interface";
 
 export default class AuthToken {
   /**
@@ -14,13 +13,13 @@ export default class AuthToken {
    * @return {String}
    */
 
-  public static createToken(user: IUser): TokenData {
+  public static createToken(createTokenData: DataToStoredInToken): TokenData {
     const expiresIn = 60 * 60; // an hour
     const secret = process.env.SECRET_KEY as string;
     const dataStoredInToken: DataToStoredInToken = {
-      _id: user._id,
-      email: user.email,
-      isAdmin: user.isAdmin
+      _id: createTokenData._id,
+      email: createTokenData.email,
+      isAdmin: createTokenData.isAdmin
     };
     return {
       expiresIn,
@@ -36,13 +35,9 @@ export default class AuthToken {
    * @return {String}
    */
   public static decodeToken(token: string): string | object | any {
-    try {
-      return jsonwebtoken.verify(
-        token,
-        process.env.SECRET_KEY as string
-      ) as string;
-    } catch (error) {
-      return false;
-    }
+    return jsonwebtoken.verify(
+      token,
+      process.env.SECRET_KEY as string
+    ) as string;
   }
 }

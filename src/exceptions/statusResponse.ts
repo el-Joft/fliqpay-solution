@@ -35,15 +35,6 @@ class StatusResponse {
   }
 
   /**
-   * @description - Internal server error response
-   * @param {object} res
-   * @param {object} data
-   * @returns {object} Error
-   */
-  static internalServerError(res: Response, data: Object) {
-    return res.status(500).json(data);
-  }
-  /**
    * @description - unprocessableEntity error response
    * @param {object} res
    * @param {object} data
@@ -54,16 +45,6 @@ class StatusResponse {
   }
 
   /**
-   * @description - Unauthorized credentials
-   * @param {object} res
-   * @param {object} data
-   * @returns {object} Unauthorized
-   */
-  static unauthorized(res: Response, data: Object) {
-    return res.status(401).json(data);
-  }
-
-  /**
    * @description - Not found response
    * @param {object} res
    * @param {object} data
@@ -71,16 +52,6 @@ class StatusResponse {
    */
   static notfound(res: Response, data: Object) {
     return res.status(404).json(data);
-  }
-
-  /**
-   * @description - forbidden credentials
-   * @param {object} res
-   * @param {object} data
-   * @returns {object} forbidden
-   */
-  static forbidden(res: Response, data: Object) {
-    return res.status(403).json(data);
   }
 }
 

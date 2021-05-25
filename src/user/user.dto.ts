@@ -1,33 +1,32 @@
-import { IsString, IsEmail } from "class-validator";
+import { IsString, IsNotEmpty, IsEmail } from "class-validator";
 
 export class CreateUserDto {
-  @IsString({
+  @IsNotEmpty({
     message: "This Field is Required"
   })
+  @IsString()
   public firstName: string;
 
-  @IsString({
+  @IsNotEmpty({
     message: "This Field is Required"
   })
+  @IsString()
   public lastName: string;
 
   @IsEmail()
   public email: string;
 
-  @IsString({
+  @IsNotEmpty({
     message: "This Field is Required"
   })
   public password: string;
 }
 
 export class LoginUserDto {
-  @IsString({
-    message: "This Field is Required"
-  })
   @IsEmail()
   public email: string;
 
-  @IsString({
+  @IsNotEmpty({
     message: "This Field is Required"
   })
   public password: string;

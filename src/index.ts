@@ -2,7 +2,7 @@ import * as http from "http";
 // import * as debug from "debug";
 import { AddressInfo } from "net";
 
-import App from "./app";
+import app from "./app";
 import { dbConfig } from "./config/config.db";
 
 // debug("ts-app:server");
@@ -10,12 +10,7 @@ import { dbConfig } from "./config/config.db";
 const app_port = dbConfig.PORT || 8080;
 const port = normalizePort(app_port);
 
-App.set("port", port);
-
-const server = http.createServer(App);
-server.listen(port);
-server.on("error", onError);
-server.on("listening", onListening);
+app.set("port", port);
 
 function normalizePort(val: number | string): number | string | boolean {
   let port: number = typeof val === "string" ? parseInt(val, 10) : val;
@@ -36,6 +31,10 @@ function onError(error: NodeJS.ErrnoException): void {
       console.error(`${bind} is already in use`);
       process.exit(1);
       break;
+    case "ECONNREFUSED":
+      console.error(error);
+      process.exit(1);
+      break;
     default:
       throw error;
   }
@@ -46,3 +45,10 @@ function onListening(): void {
   let bind = typeof addr === "string" ? `pipe ${addr}` : `port ${addr.port}`;
   console.log(`Listening on ${bind}`);
 }
+const server = http.createServer(app);
+
+server.on("error", onError);
+server.on("listening", onListening);
+server.listen(port);
+
+export default server;

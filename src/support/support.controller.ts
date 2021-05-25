@@ -24,13 +24,7 @@ class SupportController {
       };
       return StatusResponse.created(response, data);
     } catch (error) {
-      console.log(error);
-      const errorMsg = {
-        message: "Something went wrong please try again later or contact admin",
-        success: false,
-        statusCode: 500
-      };
-      return StatusResponse.internalServerError(response, errorMsg);
+      next(error);
     }
   }
 
@@ -51,14 +45,7 @@ class SupportController {
       };
       return StatusResponse.success(response, data);
     } catch (error) {
-      console.log(error);
-      // next(error);
-      const errorMsg = {
-        message: "Something went wrong please try again later or contact admin",
-        success: false,
-        statusCode: 500
-      };
-      return StatusResponse.internalServerError(response, errorMsg);
+      next(error);
     }
   }
 
@@ -83,14 +70,7 @@ class SupportController {
       };
       return StatusResponse.success(response, data);
     } catch (error) {
-      console.log(error);
-      // next(error);
-      const errorMsg = {
-        message: "Something went wrong please try again later or contact admin",
-        success: false,
-        statusCode: 500
-      };
-      return StatusResponse.internalServerError(response, errorMsg);
+      next(error);
     }
   }
 
@@ -113,14 +93,7 @@ class SupportController {
       };
       return StatusResponse.success(response, data);
     } catch (error) {
-      console.log(error);
-      // next(error);
-      const errorMsg = {
-        message: "Something went wrong please try again later or contact admin",
-        success: false,
-        statusCode: 500
-      };
-      return StatusResponse.internalServerError(response, errorMsg);
+      next(error);
     }
   }
   public static async deleteSingleSupport(
@@ -142,14 +115,7 @@ class SupportController {
       };
       return StatusResponse.success(response, data);
     } catch (error) {
-      console.log(error);
-      // next(error);
-      const errorMsg = {
-        message: "Something went wrong please try again later or contact admin",
-        success: false,
-        statusCode: 500
-      };
-      return StatusResponse.internalServerError(response, errorMsg);
+      next(error);
     }
   }
 
@@ -173,14 +139,40 @@ class SupportController {
       };
       return StatusResponse.success(response, data);
     } catch (error) {
-      console.log(error);
-      // next(error);
-      const errorMsg = {
-        message: "Something went wrong please try again later or contact admin",
-        success: false,
-        statusCode: 500
+      next(error);
+    }
+  }
+
+  public static async viewAllSupportByAdmin(
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void | Response<any, Record<string, any>>> {
+    try {
+      const supports: ISupport[] = await SupportService.viewAllSupportByAdmin(
+        request,
+        response
+      );
+      const data = {
+        success: true,
+        statusCode: 200,
+        support: supports
       };
-      return StatusResponse.internalServerError(response, errorMsg);
+      return StatusResponse.success(response, data);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  public static async getSupportDownloadByDateRange(
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ): Promise<void | Response<any, Record<string, any>>> {
+    try {
+      return await SupportService.generateSupportDownload(request, response);
+    } catch (error) {
+      next(error);
     }
   }
 }

@@ -12,27 +12,32 @@ const { validationMiddleware, checkParamsId } = AppValidationMiddleware;
 const {
   createSupport,
   viewSupportsByUser,
+  viewAllSupportByAdmin,
   updateSupport,
   viewSingleSupport,
   deleteSingleSupport,
-  closeSupport
+  closeSupport,
+  getSupportDownloadByDateRange
 } = SupportController;
-const { checkAuthToken } = checkAuthentication;
+const { authMiddleware } = checkAuthentication;
 
 // Create
 supportRouter.post(
   "/support",
-  checkAuthToken,
+  authMiddleware,
   validationMiddleware(CreateSupportDto),
   createSupport
 );
 
-// Get All
-supportRouter.get("/user/supports", checkAuthToken, viewSupportsByUser);
+// Get All By User
+supportRouter.get("/user/supports", authMiddleware, viewSupportsByUser);
+
+// Get All By Admin
+supportRouter.get("/supports", authMiddleware, viewAllSupportByAdmin);
 // Update
 supportRouter.patch(
   "/user/support/:id",
-  checkAuthToken,
+  authMiddleware,
   checkParamsId,
   validationMiddleware(UpdateSupportDto),
   updateSupport
@@ -40,23 +45,30 @@ supportRouter.patch(
 // Get Single
 supportRouter.get(
   "/user/support/:id",
-  checkAuthToken,
+  authMiddleware,
   checkParamsId,
   viewSingleSupport
 );
 // Close Single Support
 supportRouter.get(
   "/user/support/close/:id",
-  checkAuthToken,
+  authMiddleware,
   checkParamsId,
   closeSupport
 );
 // Delete Single
 supportRouter.delete(
   "/user/support/:id",
-  checkAuthToken,
+  authMiddleware,
   checkParamsId,
   deleteSingleSupport
+);
+
+// Download Support
+supportRouter.get(
+  "/download/support",
+  authMiddleware,
+  getSupportDownloadByDateRange
 );
 
 export default supportRouter;

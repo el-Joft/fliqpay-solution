@@ -23,13 +23,7 @@ class CommentController {
       };
       return StatusResponse.created(response, data);
     } catch (error) {
-      console.log(error);
-      const errorMsg = {
-        message: "Something went wrong please try again later or contact admin",
-        success: false,
-        statusCode: 500
-      };
-      return StatusResponse.internalServerError(response, errorMsg);
+      next(error);
     }
   }
 }

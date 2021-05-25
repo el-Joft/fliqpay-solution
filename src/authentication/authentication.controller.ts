@@ -23,14 +23,7 @@ class AuthenticationController {
       };
       return StatusResponse.created(response, data);
     } catch (error) {
-      console.log(error);
       next(error);
-      const errorMsg = {
-        message: "Something went wrong please try again later or contact admin",
-        success: false,
-        statusCode: 500
-      };
-      return StatusResponse.internalServerError(response, errorMsg);
     }
   }
 
@@ -52,17 +45,9 @@ class AuthenticationController {
         tokenData,
         user: user
       };
-      return StatusResponse.created(response, data);
+      return StatusResponse.success(response, data);
     } catch (error) {
-      console.log(error);
       next(error);
-
-      // const errorMsg = {
-      //   message: "Something went wrong please try again later or contact admin",
-      //   success: false,
-      //   statusCode: 500
-      // };
-      // return StatusResponse.internalServerError(response, errorMsg);
     }
   }
 }
