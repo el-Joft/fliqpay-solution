@@ -1,7 +1,7 @@
 {
   "name": "fliqpay-solution",
   "version": "1.0.0",
-  "description": "",
+  "description": "Fliqpay solution",
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test jest --no-cache --detectOpenHandles --runInBand --forceExit --verbose",
