@@ -13,8 +13,15 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "experimentalDecorators": true,
+    "allowJs": true
   },
   "typeRoots": ["src/@types", "node_modules/@types"],
   "include": ["src/**/*", "src/interfaces"],
-  "exclude": ["node_modules", "./lib", "./src/test", "**/*.spec.ts"]
+  "exclude": [
+    "node_modules",
+    "./lib",
+    "./src/test",
+    "**/*.spec.ts",
+    "test/**/*.ts"
+  ]
 }
