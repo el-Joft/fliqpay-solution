@@ -18,14 +18,29 @@ export default class CsvManager {
   ) {
     const csvHeaders = [
       "_id",
-      "comments",
+      "title",
       "status",
       "description",
-      "owner",
-      "createdAt"
+      "createdBy",
+      "isAdmin"
     ];
-    const json2csv = new Parser({ csvHeaders });
-    const csv = json2csv.parse(dataToGenerate);
+
+    const newData: any[] = [];
+
+    dataToGenerate.map(item => {
+      const data = {
+        id: item.id,
+        title: item.title,
+        status: item.status,
+        description: item.description,
+        createdBy: `${item.createdBy!.firstName} ${item.createdBy!.lastName}`,
+        isAdmin: item.createdBy!.isAdmin
+      };
+      newData.push(data);
+    });
+
+    const json2csvParser = new Parser({ csvHeaders });
+    const csv = json2csvParser.parse(newData);
 
     response.header("Content-Type", "text/csv");
     response.header(
