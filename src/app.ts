@@ -7,7 +7,9 @@ import dotenv from "dotenv";
 dotenv.config();
 import dbConnection from "./config/db_connection";
 import handlers from "./handlers";
+import StatusResponse from "./exceptions/statusResponse";
 // import seedData from "./database/seeders/seeder";
+import errorMiddleware from "./middleware/error.middleware";
 
 class App {
   public app: Application;
@@ -17,11 +19,12 @@ class App {
     this.app = express();
     this.setConfig();
     this.dbhandler();
+    this.initializeErrorHandling();
   }
 
   private setConfig(): void {
     // Allows us to receive requests with data in json format
-    this.app.use(bodyParser.json({}));
+    this.app.use(express.json());
     // Allows us to receive requests with data in x-www-form-urlencoded format
     this.app.use(bodyParser.urlencoded({ extended: true }));
     if (process.env.NODE_ENV === "development") {
@@ -36,11 +39,18 @@ class App {
     this.app.use(
       "*",
       (request: Request, response: Response): Response => {
-        return response.status(404).json({
-          message: "Route not found, Kindly check the documentation"
-        });
+        const errMsg = {
+          message: "Route not found, Kindly check the documentation",
+          success: false,
+          statusCode: 404
+        };
+        return StatusResponse.notfound(response, errMsg);
       }
     );
+  }
+
+  private initializeErrorHandling() {
+    this.app.use(errorMiddleware);
   }
   private async dbhandler(): Promise<void> {
     dbConnection().then(async () => {

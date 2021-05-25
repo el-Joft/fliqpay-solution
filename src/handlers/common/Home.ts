@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-
+import StatusResponse from "../../exceptions/statusResponse";
 export default class HomeController {
   /**
    * Returns success and message when you hit the home route /
@@ -18,22 +18,21 @@ export default class HomeController {
    *
    */
   static getHome(req: Request, res: Response): Response {
-    return res.status(200).json({
+    const data = {
       success: true,
-      data: [
-        {
-          message: "Welcome to Fliqpay assessment solution",
-          description: "Fliqpay assessment solution",
-          status: "success",
-          data: {
-            name: "Omotayo Timothy",
-            github: "@el-Joft",
-            email: "ottimothy@gmail.com",
-            mobile: "08136681130"
-          },
-          swaggerDocUrl: "/api/v1/swagger"
-        }
-      ]
-    });
+      data: {
+        message: "Welcome to Fliqpay assessment solution",
+        description: "Fliqpay assessment solution",
+        success: true,
+        data: {
+          name: "Omotayo Timothy",
+          github: "@el-Joft",
+          email: "ottimothy@gmail.com",
+          mobile: "08136681130"
+        },
+        swaggerDocUrl: "/api/v1/swagger"
+      }
+    };
+    return StatusResponse.success(res, data);
   }
 }

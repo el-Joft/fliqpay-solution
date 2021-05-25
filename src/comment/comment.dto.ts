@@ -1,7 +1,7 @@
-import { IsString } from "class-validator";
+import { IsNotEmpty } from "class-validator";
 
 export class CreateCommentDto {
-  @IsString({
+  @IsNotEmpty({
     message: "This Field is Required"
   })
   public comment: string;

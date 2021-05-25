@@ -51,4 +51,42 @@ export default class SupportRepository {
       { new: true }
     ).populate("createdBy comments", "-password");
   }
+
+  /**
+   * @returns {Promise<ISupport[]>} fetched resource
+   */
+  static async geAllSupports(): Promise<ISupport[]> {
+    return await Support.find({
+      isArchive: false
+    }).populate("createdBy comments", "-password");
+  }
+
+  /**
+   * @returns {Promise<ISupport[]>} fetched resource
+   */
+  static async getSupportByDateRange(
+    startDate: any,
+    endDate: any
+  ): Promise<ISupport[]> {
+    return await Support.find({
+      completedAt: { $gt: new Date(startDate), $lt: new Date(endDate) },
+      status: 'CLOSED',
+      isArchive: false
+    }).populate("createdBy comments", "-password");
+  }
+
+   /**
+   * @param {number} time from last month
+   * @returns {Promise<ISupport[]>} fetched resource
+   */
+  static async getSupportByDate(
+    lastMonth: number,
+  ): Promise<ISupport[]> {
+    return await Support.find({
+      status: 'CLOSED',
+      completedAt: { $gt: lastMonth },
+    }).populate('createdBy comments', '-password');
+  }
 }
+
+
