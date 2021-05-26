@@ -12,8 +12,8 @@ module.exports = {
     "^.+\\.ts?$": "ts-jest"
   },
   testRegex: ".spec.ts$",
-  modulePathIgnorePatterns: ["__mocks__", "node_modules"],
-  testPathIgnorePatterns: ["<rootDir>/dist/", "<rootDir>/node_modules/"],
+  modulePathIgnorePatterns: ["__mocks__", "node_modules", "seed"],
+  testPathIgnorePatterns: ["<rootDir>/dist/", "<rootDir>/node_modules/", "<rootDir>/src/seed/"],
   testTimeout: 30000,
   coverageDirectory: "./coverage",
   collectCoverage: true,
