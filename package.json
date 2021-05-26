@@ -11,15 +11,17 @@
     "prestart:prod": "npm run build",
     "start:prod": "cross-env NODE_ENV=staging node ./dist/src/index.js",
     "build": "npm run clean && tsc",
-    "test:cov": "cross-env NODE_ENV=test PORT=5050 jest --no-cache --detectOpenHandles --runInBand --forceExit --coverage --timeout=1500000",
+    "test:cov": "cross-env NODE_ENV=test PORT=4040 jest --no-cache --detectOpenHandles --runInBand --forceExit --coverage --timeout=1500000",
     "ts-watch": "npm run clean && tsc -w",
-    "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls"
+    "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
+    "seed": "ts-node-dev ./src/seed/index.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@types/faker": "^5.5.5",
     "@types/jsonwebtoken": "^8.5.1",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
@@ -29,13 +31,16 @@
     "cors": "^2.8.5",
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
+    "faker": "^5.5.3",
     "json2csv": "^5.0.6",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.7",
     "mongoose": "^5.12.10",
     "morgan": "^1.10.0",
+    "swagger-ui-express": "^4.1.6",
     "ts-node": "^9.1.1",
-    "ts-node-dev": "^1.1.6"
+    "ts-node-dev": "^1.1.6",
+    "tsoa": "^3.8.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
@@ -49,6 +54,8 @@
     "@types/morgan": "^1.9.2",
     "@types/node": "^15.3.1",
     "@types/supertest": "^2.0.11",
+    "@types/swagger-ui-express": "^4.1.2",
+    "concurrently": "^6.2.0",
     "cross-env": "^7.0.3",
     "jest": "^26.6.3",
     "nodemon": "^2.0.7",

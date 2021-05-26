@@ -29,8 +29,7 @@ export default class HomeController {
           github: "@el-Joft",
           email: "ottimothy@gmail.com",
           mobile: "08136681130"
-        },
-        swaggerDocUrl: "/api/v1/swagger"
+        }
       }
     };
     return StatusResponse.success(res, data);
